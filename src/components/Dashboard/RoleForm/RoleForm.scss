@@ -1,0 +1,16 @@
+@import "../../variables.scss";
+
+.RoleForm {
+  &__main {
+    &__permissions {
+      margin-top: $box-spacing-sm;
+    }
+
+    .help-block {
+      font-size: 14px;
+      color: $color-secondary-coral;
+      display: block;
+      height: 9px;
+    }
+  }
+}

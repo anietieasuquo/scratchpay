@@ -1,0 +1,120 @@
+{
+  "users": [
+    {
+      "id": 10001,
+      "firstName": "Jon",
+      "lastName": "Snow",
+      "email": "jonsnow@gmail.com",
+      "status": "active",
+      "roleId": 10001,
+      "password": "am9uMTAwMDE="
+    },
+    {
+      "id": 10002,
+      "firstName": "Daenerys",
+      "lastName": "Targaryen",
+      "email": "dragonqueen@gmail.com",
+      "status": "active",
+      "roleId": 10001,
+      "password": "ZHJhZ29ucXVlZW4xMDAwMg=="
+    },
+    {
+      "id": 10003,
+      "firstName": "Arya",
+      "lastName": "Stark",
+      "email": "aryastark@gmail.com",
+      "status": "active",
+      "roleId": 10003,
+      "password": "YXJ5YXN0YXJrMTAwMDM="
+    },
+    {
+      "id": 10004,
+      "firstName": "Tyrion",
+      "lastName": "Lannister",
+      "email": "tyrion@gmail.com",
+      "status": "active",
+      "roleId": 10002,
+      "password": "dHlyaW9uMTAwMDQ="
+    },
+    {
+      "id": 10005,
+      "firstName": "Jaime",
+      "lastName": "Lannister",
+      "email": "jaimelannister@gmail.com",
+      "status": "inactive",
+      "roleId": 10002,
+      "password": "amFpbWVsYW5uaXN0ZXIxMDAwNQ=="
+    },
+    {
+      "id": 10006,
+      "firstName": "Ned",
+      "lastName": "Stark",
+      "email": "nedstark@gmail.com",
+      "status": "active",
+      "roleId": 10003,
+      "password": "bmVkc3RhcmsxMDAwNg=="
+    },
+    {
+      "id": 10007,
+      "firstName": "Cersei",
+      "lastName": "Lannister",
+      "email": "cerseilanny@gmail.com",
+      "status": "active",
+      "roleId": 10002,
+      "password": "Y2Vyc2VpbGFubnkxMDAwNw=="
+    },
+    {
+      "id": 10008,
+      "firstName": "Theon",
+      "lastName": "Greyjoy",
+      "email": "theon@gmail.com",
+      "status": "active",
+      "roleId": 10001,
+      "password": "dGhlb24xMDAwOA=="
+    },
+    {
+      "id": 10009,
+      "firstName": "Sansa",
+      "lastName": "Stark",
+      "email": "sansastark@gmail.com",
+      "status": "active",
+      "roleId": 10003,
+      "password": "c2Fuc2FzdGFyazEwMDA5"
+    },
+    {
+      "id": 10010,
+      "firstName": "Samuel",
+      "lastName": "Tarly",
+      "email": "samtarly@gmail.com",
+      "status": "active",
+      "roleId": 10002,
+      "password": "c2FtdGFybHkxMDAxMA=="
+    }
+  ],
+  "roles": [
+    {
+      "id": 10001,
+      "name": "DOCTOR",
+      "permissions": ["VIEW_USER", "CREATE_USER", "UPDATE_USER"]
+    },
+    {
+      "id": 10002,
+      "name": "ACCOUNTANT",
+      "permissions": ["VIEW_USER"]
+    },
+    {
+      "id": 10003,
+      "name": "ADMIN",
+      "permissions": [
+        "VIEW_USER",
+        "CREATE_USER",
+        "UPDATE_USER",
+        "DELETE_USER",
+        "VIEW_ROLE",
+        "CREATE_ROLE",
+        "UPDATE_ROLE",
+        "DELETE_ROLE"
+      ]
+    }
+  ]
+}

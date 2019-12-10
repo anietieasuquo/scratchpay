@@ -1,0 +1,19 @@
+@import "../../variables.scss";
+
+.Header {
+
+  &__main {
+    .logo {
+      max-width: 200px;
+      height: auto;
+    }
+
+    nav .nav-link.btn {
+      border: 1px solid $color-primary-light-blue;
+    }
+
+    nav .nav-link.btn:hover {
+      border-color: $color-primary-blue;
+    }
+  }
+}

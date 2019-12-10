@@ -1,0 +1,57 @@
+@import "../variables.scss";
+
+.Form {
+  &__body {
+    width: 100%;
+
+    &__title {
+      font-weight: $font-weight-bold;
+    }
+
+    &__btn-container {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+
+    &__button {
+      font-size: $font-size-regular;
+      color: $color-white;
+      text-transform: uppercase;
+      width: 100%;
+      border-radius: $form-input-border-radius;
+      background: $color-primary-blue;
+      display: flex;
+
+      justify-content: center;
+      align-items: center;
+      padding: $box-spacing-xs - 7;
+
+      -webkit-transition: all 0.4s;
+      -o-transition: all 0.4s;
+      -moz-transition: all 0.4s;
+      transition: all 0.4s;
+    }
+
+    &__button:hover {
+      background: $color-primary-light-blue;
+      color: $color-primary-blue;
+    }
+
+    &__button:disabled,
+    &__button:disabled:hover {
+      background: $color-primary-cobalt;
+      color: $color-white;
+      cursor: default;
+    }
+
+    .error {
+      font-size: 14px;
+      color: $color-secondary-coral;
+      text-align: center;
+      display: block;
+      height: 9px;
+      margin-bottom: $box-spacing-xs;
+    }
+  }
+}

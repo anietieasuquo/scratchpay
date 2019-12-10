@@ -1,0 +1,57 @@
+@import "../variables.scss";
+
+.Dashboard {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-self: center;
+
+  &__container {
+    width: 90vw;
+  }
+
+  &__main {
+    width: 100%;
+    min-height: 60vh;
+    border: 1px solid $color-secondary-light-gray;
+    border-top: 1px solid #dddddd;
+    border-bottom-left-radius: $box-border-radius;
+    border-bottom-right-radius: $box-border-radius;
+    background-color: $color-white;
+    margin-bottom: $box-spacing-sm;
+
+    &__content {
+      padding: $box-spacing-sm;
+    }
+
+    .btn {
+      cursor: pointer;
+    }
+    tbody tr {
+      &:hover {
+        background-color: $color-secondary-dark-gray;
+        color: #ffffff;
+        cursor: pointer;
+
+        td a {
+          color: $color-primary-light-blue;
+        }
+      }
+    }
+
+    td {
+      font-size: $font-size-sm;
+
+      span {
+        margin-left: 5px;
+      }
+
+      a {
+        color: $color-primary-blue;
+        cursor: pointer;
+      }
+    }
+  }
+}

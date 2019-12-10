@@ -1,0 +1,35 @@
+@import url('https://fonts.googleapis.com/css?family=Muli:400,600,700&display=swap');
+
+// Colour Variables
+$color-primary-blue: #245CA6 !default;
+$color-primary-light-blue: #A3C7ED !default;
+$color-primary-cobalt: #293D99 !default;
+$color-primary-navy: #212445 !default;
+$color-secondary-coral: #F56E57 !default;
+$color-secondary-yellow: #F5B81C !default;
+$color-secondary-beige: #FAF0E3 !default;
+$color-secondary-dark-gray: #241F21 !default;
+$color-secondary-light-gray: #efefef !default;
+$color-white: #ffffff !default;
+
+// Font Variables
+$font-muli: 'Muli', sans-serif;
+$font-weight-regular: 400;
+$font-weight-semi-bold: 600;
+$font-weight-bold: 700;
+// Text
+$font-size-sm: 12px;
+$font-size-regular: 16px;
+$font-size-big: 25px;
+
+// Box Variables
+$box-border-radius: 6px;
+$box-spacing-xs: 15px;
+$box-spacing-sm: 30px;
+$box-border-sm: 1px solid $color-secondary-light-gray;
+
+// Form Variables
+$form-input-border-radius: 3px;
+
+// Bootstrap Overrides
+$primary: $color-primary-blue;

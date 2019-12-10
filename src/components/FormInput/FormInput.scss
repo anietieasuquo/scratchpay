@@ -1,0 +1,30 @@
+@import "../variables.scss";
+
+.FormInput {
+  .form-group {
+    margin-top: $box-spacing-xs;
+    margin-bottom: $box-spacing-xs + 5;
+  }
+
+  .form-group.has-error input {
+      border: 1px solid $color-secondary-coral;
+  }
+
+  .help-block {
+    font-size: 12px;
+    color: $color-secondary-coral;
+    text-align: center;
+    display: block;
+    height: 7px;
+  }
+
+  &__input {
+    font-size: $font-size-regular;
+    color: $color-secondary-dark-gray;
+    display: block;
+    width: 100%;
+    background: $color-secondary-light-gray;
+    border-radius: $form-input-border-radius;
+    padding: $box-spacing-xs + 8;
+  }
+}
