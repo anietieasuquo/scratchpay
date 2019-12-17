@@ -1,39 +1,42 @@
 /* eslint-disable no-throw-literal */
 import * as util from "../util/commons";
-import userService from "../services/userService";
-import roleService from "../services/roleService";
-
+import { logout } from "../util/authUtil";
+import restClient from "../util/restClient";
 /**
  * Handles user authentication.
  * @param {Object} payload Authentication payload
  */
-const authenticate = function(payload) {
-  const user = userService.getUserByEmail(payload.email);
+const authenticate = payload => {
+  return new Promise((resolve, reject) => {
+    restClient({ endpoint: "/auth", method: "POST", body: payload })
+      .then(res => res.json())
+      .then(res => {
+        if (!res.token) {
+          reject(res.message);
+          return;
+        }
 
-  if (!util.isValid(user) || util.isEmpty(user)) {
-    throw "Account not found";
-  }
+        const authentication = {
+          isAuthenticated: true,
+          user: { ...res.user, token: res.token },
+          message: ""
+        };
 
-  const userPassword = window.atob(user.password);
-
-  if (payload.password !== userPassword) {
-    throw "Invalid credentials";
-  }
-
-  const role = roleService.getRoleByID(user.roleId);
-
-  user.token = util.generateRandomString(50);
-  user.role = role;
-
-  delete user.password;
-
-  const authentication = {
-    isAuthenticated: true,
-    user: user,
-    message: ""
-  };
-
-  return { authentication };
+        resolve({ authentication });
+      })
+      .catch(error =>
+        reject(!util.isEmpty(error) ? error : "Failed to connect")
+      );
+  });
 };
 
-export default { authenticate };
+/**
+ * Handles user logout.
+ * @returns {Boolean} Indication of successful logout
+ */
+const logoutUser = async () => {
+  logout();
+  return true;
+};
+
+export default { authenticate, logoutUser };

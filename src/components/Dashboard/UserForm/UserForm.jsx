@@ -66,7 +66,7 @@ class UserForm extends Component {
                 password: { value: '', isValid: true, message: '' },
                 confirmPassword: { value: '', isValid: true, message: '' },
                 status: { value: user.status, isValid: true, message: '' },
-                role: { value: !util.isEmpty(user.role) ? user.role.name : user.role, isValid: true, message: '' }
+                role: { value: !util.isEmpty(user.role) ? user.role.id : user.role, isValid: true, message: '' }
             });
         }
     }
@@ -276,7 +276,7 @@ class UserForm extends Component {
                             <select value={this.state.role.value} className="form-control" id="userRole" name="role" onChange={this.handleChange}>
                                 {
                                     this.props.roles.map((role, k) => (
-                                        <option value={role.name} key={role.name}>{role.name}</option>
+                                        <option value={role.id} key={role.id}>{role.name}</option>
                                     ))
                                 }
                             </select>

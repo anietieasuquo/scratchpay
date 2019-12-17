@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, {Component} from 'react';
+import {connect} from 'react-redux';
 
 import './EditRole.scss';
 
@@ -14,7 +14,7 @@ import RoleForm from '../RoleForm';
  * @extends Component
  */
 class EditRole extends Component {
-    
+
     /**
      * Constructor to inject props and initialize state.
      * @constructor
@@ -24,8 +24,8 @@ class EditRole extends Component {
         super(props);
 
         this.state = {
-            name: { value: '', isValid: true, message: '' },
-            permissions: { value: [], isValid: true, message: '' }
+            name: {value: '', isValid: true, message: ''},
+            permissions: {value: [], isValid: true, message: ''}
         };
     }
 
@@ -49,7 +49,7 @@ class EditRole extends Component {
      * @method
      * @param {Object} data - an object with role data
      */
-    handleSubmit = (data) => {
+    handleSubmit = data => {
         const id = this.props.match.params.id;
         this.props.updateRole({
             id: id,
@@ -63,7 +63,7 @@ class EditRole extends Component {
      * @method
      * @param {integer} id - the role ID
      */
-    handleModalClick = (id) => {
+    handleModalClick = id => {
         this.props.clearRoleCreate();
         this.props.history.push('/dashboard/roles');
     }
@@ -97,14 +97,14 @@ class EditRole extends Component {
     }
 }
 
-function mapStateToProps(state) {
+const mapStateToProps = state => {
     return {
         roleUpdated: state.roleReducer.roleUpdated,
         role: state.roleReducer.role
     };
 }
 
-function mapDispatchToProps(dispatch) {
+const mapDispatchToProps = dispatch => {
     return {
         updateRole: (payload) => dispatch(ROLE_ACTIONS.updateRole(payload)),
         getRole: (id) => dispatch(ROLE_ACTIONS.getRoleByID(id)),

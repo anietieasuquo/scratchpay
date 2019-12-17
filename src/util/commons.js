@@ -47,10 +47,24 @@ const generateRandomNumber = function(length) {
   return result;
 };
 
+/**
+ * Encodes data to Base64.
+ * @param {String} data The data to encode
+ */
+const base64Encode = data => Buffer.from(data).toString("base64");
+
+/**
+ * Decodes base64 data to text.
+ * @param {String} data The data to decode
+ */
+const base64Decode = data => Buffer.from(data, "base64").toString("utf-8");
+
 export {
   isValidEmail,
   isValid,
   isEmpty,
   generateRandomString,
-  generateRandomNumber
+  generateRandomNumber,
+  base64Encode,
+  base64Decode
 };

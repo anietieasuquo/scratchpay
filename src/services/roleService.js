@@ -1,158 +1,94 @@
-/* eslint-disable no-throw-literal */
-import data from "../static/data.json";
-import * as util from "../util/commons";
-import * as storageKeys from "../store/keys/storageKeys";
-
-const createPermissionString = function(role) {
-  let string = "";
-
-  role.permissions.forEach(permission => {
-    string += permission + ", ";
-  });
-
-  return string.trim().substring(0, string.length - 2);
-};
+import restClient from "../util/restClient";
 
 /**
  * Gets all roles.
  */
-const getAllRoles = function() {
-  const memoryList = localStorage.getItem(storageKeys.ROLES);
+const getAllRoles = async () => {
+  const response = await restClient({
+    endpoint: "/roles",
+    method: "GET"
+  });
+  const json = await response.json();
 
-  if (util.isValid(memoryList) && memoryList.length !== 0) {
-    return JSON.parse(memoryList);
-  }
-
-  const roles = data.roles;
-
-  if (!util.isValid(roles) || roles.length === 0) {
-    return [];
-  }
-
-  for (let index = 0; index < roles.length; index++) {
-    roles[index].permissionString = createPermissionString(roles[index]);
-  }
-
-  localStorage.setItem(storageKeys.ROLES, JSON.stringify(roles));
-
-  return roles;
+  return json;
 };
 
 /**
  * Gets role by ID.
  * @param {Integer} id Role ID
  */
-const getRoleByID = id =>
-  getAllRoles().filter(r => parseInt(r.id) === parseInt(id))[0];
+const getRoleByID = async id => {
+  const response = await restClient({
+    endpoint: `/roles/${id}`,
+    method: "GET"
+  });
+  const json = await response.json();
 
-/**
- * Gets a role by name and optional ID
- * @param {String} name Role name
- * @param {Integer} id Optional Role ID
- */
-const getRoleByName = function(name, id) {
-  if (id) {
-    return getAllRoles().filter(
-      r =>
-        r.name.toLowerCase() === name.toLowerCase() &&
-        parseInt(r.id) !== parseInt(id)
-    )[0];
-  }
-
-  return getAllRoles().filter(
-    r => r.name.toLowerCase() === name.toLowerCase()
-  )[0];
+  return json;
 };
 
 /**
  * Creates a role.
  * @param {Object} payload Role payload
  */
-const createRole = function(payload) {
-  let role = getRoleByName(payload.name);
+const createRole = async payload => {
+  const response = await restClient({
+    endpoint: "/roles",
+    method: "POST",
+    body: payload
+  });
+  const json = await response.json();
 
-  if (util.isValid(role) && !util.isEmpty(role)) {
-    throw "Role already exists";
+  if (response.status !== 201) {
+    await Promise.reject(json.message);
+    return;
   }
 
-  const id = parseInt(util.generateRandomNumber(9));
-
-  role = { id, ...payload, permissionString: createPermissionString(payload) };
-
-  const roles = getAllRoles() || [];
-
-  roles.push(role);
-
-  localStorage.setItem(storageKeys.ROLES, JSON.stringify(roles));
-
-  return { roleCreated: true, error: "" };
+  return { roleCreated: true, error: "", role: json };
 };
 
 /**
  * Updates a role.
  * @param {Object} payload Role payload
  */
-const updateRole = function(payload) {
-  let role = getRoleByID(payload.id);
+const updateRole = async payload => {
+  const response = await restClient({
+    endpoint: `/roles/${payload.id}`,
+    method: "PUT",
+    body: payload
+  });
+  const json = await response.json();
 
-  if (!util.isValid(role) || util.isEmpty(role)) {
-    throw "Role not found";
+  if (response.status !== 202) {
+    await Promise.reject(json.message);
+    return;
   }
 
-  const duplicateRole = getRoleByName(payload.name, payload.id);
-
-  if (util.isValid(duplicateRole) && !util.isEmpty(duplicateRole)) {
-    throw "Role already exists";
-  }
-
-  role = { ...payload, permissionString: createPermissionString(payload) };
-
-  const roles = getAllRoles() || [];
-
-  for (let index = 0; index < roles.length; index++) {
-    let r = roles[index];
-    if (parseInt(role.id) === parseInt(r.id)) {
-      roles[index] = role;
-      break;
-    }
-  }
-
-  localStorage.setItem(storageKeys.ROLES, JSON.stringify(roles));
-
-  return { roleUpdated: true, error: "" };
+  return { roleUpdated: true, error: "", role: json };
 };
 
 /**
  * Deletes a role.
  * @param {Integer} id Role ID
  */
-const deleteRole = function(id) {
-  const role = getRoleByID(id);
+const deleteRole = async id => {
+  const response = await restClient({
+    endpoint: `/roles/${id}`,
+    method: "DELETE"
+  });
+  const json = await response.json();
 
-  if (!util.isValid(role) || util.isEmpty(role)) {
-    throw "Role not found";
+  if (response.status !== 202) {
+    await Promise.reject(json.message);
+    return;
   }
 
-  const roles = getAllRoles();
-
-  for (let index = 0; index < roles.length; index++) {
-    const r = roles[index];
-
-    if (r.id === role.id) {
-      roles.splice(index, 1);
-      break;
-    }
-  }
-
-  localStorage.setItem(storageKeys.ROLES, JSON.stringify(roles));
-
-  return true;
+  return { role: { id } };
 };
 
 export default {
   getAllRoles,
   getRoleByID,
-  getRoleByName,
   createRole,
   updateRole,
   deleteRole

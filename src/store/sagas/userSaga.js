@@ -26,7 +26,7 @@ export function* getUsersSaga() {
 export function* getUserByIdSaga(payload) {
   try {
     const response = yield call(userService.getUserByID, payload.payload);
-    
+
     yield put({
       type: ACTION_TYPES.GET_USER_SUCCESS,
       response: { user: response }
@@ -45,7 +45,6 @@ export function* createUserSaga(payload) {
     const response = yield call(userService.createUser, payload.payload);
 
     yield put({ type: ACTION_TYPES.CREATE_USER_SUCCESS, response });
-    yield put({ type: ACTION_TYPES.GET_ALL_USERS });
   } catch (error) {
     yield put({ type: ACTION_TYPES.CREATE_USER_FAILURE, response: { error } });
   }
@@ -60,7 +59,6 @@ export function* updateUserSaga(payload) {
     const response = yield call(userService.updateUser, payload.payload);
 
     yield put({ type: ACTION_TYPES.UPDATE_USER_SUCCESS, response });
-    yield put({ type: ACTION_TYPES.GET_ALL_USERS });
   } catch (error) {
     yield put({ type: ACTION_TYPES.UPDATE_USER_FAILURE, response: { error } });
   }
@@ -75,7 +73,6 @@ export function* deleteUserSaga(payload) {
     const response = yield call(userService.deleteUser, payload.payload);
 
     yield put({ type: ACTION_TYPES.DELETE_USER_SUCCESS, response });
-    yield put({ type: ACTION_TYPES.GET_ALL_USERS });
   } catch (error) {
     yield put({ type: ACTION_TYPES.DELETE_USER_FAILURE, response: { error } });
   }

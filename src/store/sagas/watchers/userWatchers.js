@@ -5,9 +5,9 @@ import {
   createUserSaga,
   updateUserSaga,
   deleteUserSaga
-} from "./userSaga";
+} from "../userSaga";
 
-import * as ACTION_TYPES from "../actions/actionTypes";
+import * as ACTION_TYPES from "../../actions/actionTypes";
 
 /**
  * Watches for user actions and pipes to user saga.

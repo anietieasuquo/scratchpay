@@ -43,12 +43,9 @@ export function* getRoleByIdSaga(payload) {
 export function* createRoleSaga(payload) {
   try {
     const response = yield call(roleService.createRole, payload.payload);
-
     yield put({ type: ACTION_TYPES.CREATE_ROLE_SUCCESS, response });
-    yield put({ type: ACTION_TYPES.GET_ALL_ROLES });
   } catch (error) {
     yield put({ type: ACTION_TYPES.CREATE_ROLE_FAILURE, response: { error } });
-    yield put({ type: ACTION_TYPES.GET_ALL_ROLES });
   }
 }
 
@@ -61,7 +58,6 @@ export function* updateRoleSaga(payload) {
     const response = yield call(roleService.updateRole, payload.payload);
 
     yield put({ type: ACTION_TYPES.UPDATE_ROLE_SUCCESS, response });
-    yield put({ type: ACTION_TYPES.GET_ALL_ROLES });
   } catch (error) {
     yield put({ type: ACTION_TYPES.UPDATE_ROLE_FAILURE, response: { error } });
   }
@@ -76,7 +72,6 @@ export function* deleteRoleSaga(payload) {
     const response = yield call(roleService.deleteRole, payload.payload);
 
     yield put({ type: ACTION_TYPES.DELETE_ROLE_SUCCESS, response });
-    yield put({ type: ACTION_TYPES.GET_ALL_ROLES });
   } catch (error) {
     yield put({ type: ACTION_TYPES.DELETE_ROLE_FAILURE, response: { error } });
   }
