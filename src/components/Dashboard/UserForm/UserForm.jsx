@@ -198,7 +198,7 @@ class UserForm extends Component {
                         title="Success"
                         id={null}
                         onOk={this.props.handleModalOk}
-                        onCancel={this.props.handleModalCancel}
+                        showCancel={false}
                     />
                     <ScratchForm handleSubmit={this.handleSubmit}>
                         {this.props.error !== '' ? <div className="error">{this.props.error}</div> : <div />}

@@ -16,7 +16,7 @@ const ModalDialog = (props) => (
                     {props.message}
                 </ModalBody>
                 <ModalFooter>
-                    <Button color="secondary" onClick={props.onCancel}>Cancel</Button>{' '}
+                    {props.showCancel ? <Button color="secondary" onClick={props.onCancel}>Cancel</Button> : <div />}
                     <Button color="primary" onClick={() => props.onOk(props.id)}>Ok</Button>
                 </ModalFooter>
             </Modal>
