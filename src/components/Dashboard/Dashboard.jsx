@@ -1,5 +1,6 @@
-import React, { Component } from 'react';
-import { BrowserRouter, Switch } from 'react-router-dom';
+import React, {Component} from 'react';
+import {BrowserRouter, Switch} from 'react-router-dom';
+import {connect} from 'react-redux';
 
 import Header from './Header';
 import PrivateRoute from '../../components/PrivateRoute';
@@ -15,7 +16,7 @@ import EditRole from './EditRole';
 import './Dashboard.scss';
 
 import * as util from '../../util/commons';
-import { getAuthUser } from '../../util/authUtil';
+import {getAuthUser, isLoggedIn} from '../../util/authUtil';
 
 /**
  * Dashboard component.
@@ -49,7 +50,7 @@ class Dashboard extends Component {
             return;
         }
 
-        this.setState({ user });
+        this.setState({user});
     }
 
     /**
@@ -83,4 +84,16 @@ class Dashboard extends Component {
     }
 }
 
-export default Dashboard;
+function mapStateToProps(state, ownProps) {
+    if (!isLoggedIn()) {
+        ownProps.history.push('/logout');
+    }
+
+    if (state.authenticationReducer.authentication.authAction === 403) {
+        ownProps.history.push('/403');
+    }
+
+    return {};
+}
+
+export default connect(mapStateToProps)(Dashboard);

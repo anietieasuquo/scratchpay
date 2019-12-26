@@ -5,9 +5,9 @@ import {
   createRoleSaga,
   updateRoleSaga,
   deleteRoleSaga
-} from "./roleSaga";
+} from "../roleSaga";
 
-import * as ACTION_TYPES from "../actions/actionTypes";
+import * as ACTION_TYPES from "../../actions/actionTypes";
 
 /**
  * Watches for role actions and pipes to role saga.

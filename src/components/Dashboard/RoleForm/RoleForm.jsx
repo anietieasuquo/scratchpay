@@ -1,10 +1,10 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, {Component} from 'react';
+import {connect} from 'react-redux';
 
 import './RoleForm.scss';
 
-import * as ROLE_ACTIONS from '../../../store/actions/roleActions';
+import * as PERMISSION_ACTIONS from '../../../store/actions/permissionActions';
 import * as util from '../../../util/commons';
 
 import ScratchForm from '../../ScratchForm';
@@ -27,8 +27,8 @@ class RoleForm extends Component {
         super(props);
 
         this.state = {
-            name: { value: '', isValid: true, message: '' },
-            permissions: { value: [], isValid: true, message: '' }
+            name: {value: '', isValid: true, message: ''},
+            permissions: {value: [], isValid: true, message: ''}
         };
     }
 
@@ -37,11 +37,11 @@ class RoleForm extends Component {
      * @method
      */
     componentDidMount() {
-        if (this.props.roles.length === 0) {
-            this.props.getRoles();
+        if (this.props.permissions.length === 0) {
+            this.props.getPermissions();
         }
 
-        this.setState({ ...this.state, ...this.props.data });
+        this.setState({...this.state, ...this.props.data});
     }
 
     /**
@@ -55,8 +55,8 @@ class RoleForm extends Component {
 
             this.setState({
                 ...this.state,
-                name: { value: role.name, isValid: true, message: '' },
-                permissions: { value: role.permissions, isValid: true, message: '' }
+                name: {value: role.name, isValid: true, message: ''},
+                permissions: {value: role.permissions, isValid: true, message: ''}
             });
         }
     }
@@ -166,13 +166,12 @@ class RoleForm extends Component {
                                     <FormInput
                                         type="checkbox"
                                         name="permissions"
-                                        placeholder={p}
+                                        placeholder={p.name}
                                         onChange={this.handleChange}
-                                        value={p || ''}
-                                        message={this.state.name.message}
-                                        checked={!util.isEmpty(this.state.permissions.value) && this.state.permissions.value.includes(p)}
-                                        id={p}
-                                        key={p}
+                                        value={p.id || ''}
+                                        checked={!util.isEmpty(this.state.permissions.value) && this.state.permissions.value.includes(p.id + "")}
+                                        id={p.name}
+                                        key={p.id}
                                     />
                                 ))
                             }
@@ -189,25 +188,15 @@ class RoleForm extends Component {
 }
 
 function mapStateToProps(state) {
-    const roles = state.roleReducer.roles;
-    let permissions = new Set();
-
-    roles.forEach(r => {
-        if (util.isValid(r.permissionString)) {
-            r.permissionString.split(",").forEach(p => permissions.add(p));
-        }
-    });
-
     return {
         error: state.roleReducer.error,
-        roles: state.roleReducer.roles,
-        permissions: [...permissions]
+        permissions: state.permissionReducer.permissions
     };
 }
 
 function mapDispatchToProps(dispatch) {
     return {
-        getRoles: () => dispatch(ROLE_ACTIONS.getAllRoles())
+        getPermissions: () => dispatch(PERMISSION_ACTIONS.getAllPermissions())
     };
 }
 

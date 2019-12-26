@@ -18,3 +18,15 @@ export function* authenticationSaga(payload) {
     yield put({ type: ACTION_TYPES.AUTH_FAILURE, response: { error } });
   }
 }
+
+/**
+ * Logout saga to handle logout.
+ */
+export function* logoutSaga() {
+  try {
+    const response = yield call(authenticationService.logoutUser);
+    yield put({ type: ACTION_TYPES.LOGOUT_SUCCESS, response });
+  } catch (error) {
+    yield put({ type: ACTION_TYPES.LOGOUT_FAILURE, response: { error } });
+  }
+}

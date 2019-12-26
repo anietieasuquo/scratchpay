@@ -13,3 +13,8 @@ export const authenticate = payload => ({
  * Creates action to logout a user.
  */
 export const logout = () => ({ type: ACTION_TYPES.LOGOUT });
+
+/**
+ * Creates action to redirect user to 403 page.
+ */
+export const forbidden = () => ({ type: ACTION_TYPES.AUTH_FORBIDDEN });

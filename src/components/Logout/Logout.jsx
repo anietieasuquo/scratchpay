@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, {Component} from 'react';
+import {connect} from 'react-redux';
 
 import * as AUTHENTICATION_ACTIONS from '../../store/actions/authenticationActions';
-import { isLoggedIn, logout } from '../../util/authUtil';
+import {isLoggedIn} from '../../util/authUtil';
 
 /**
  * Logout component to handle user logout.
@@ -17,7 +17,6 @@ class Logout extends Component {
      */
     componentDidMount() {
         if (isLoggedIn()) {
-            logout();
             this.props.logout();
         }
 
